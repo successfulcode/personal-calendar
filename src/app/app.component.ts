@@ -9,6 +9,4 @@ import { FooterComponent } from 'app/components/footer/footer.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'Personal calendar';
-}
+export class AppComponent { }
