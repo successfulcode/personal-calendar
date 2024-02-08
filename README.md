@@ -1,5 +1,13 @@
 # PersonalCalendar
 
+The Personal Calendar app is designed to help users manage their events efficiently. It offers features such as adding new events, deleting existing ones, and viewing events in both month and detailed views. The application utilizes Angular for its frontend framework and NgRx for state management, ensuring a robust and scalable architecture.
+
+## Node.js version
+
+^18.13.0 || ^20.9.0
+
+## Angular CLI
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
 
 ## Development server
@@ -17,10 +25,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 

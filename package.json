@@ -1,6 +1,7 @@
 {
   "name": "personal-calendar",
   "version": "1.0.0",
+  "author": "Sergej Mickevic <Sergej.Mickevic@gmail.com>",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
