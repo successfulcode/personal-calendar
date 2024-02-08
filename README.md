@@ -2,6 +2,10 @@
 
 The Personal Calendar app is designed to help users manage their events efficiently. It offers features such as adding new events, deleting existing ones, and viewing events in both month and detailed views. The application utilizes Angular for its frontend framework and NgRx for state management, ensuring a robust and scalable architecture.
 
+## Live preview
+
+[https://pesonal-calendar.netlify.app/](https://pesonal-calendar.netlify.app/)
+
 ## Node.js version
 
 ^18.13.0 || ^20.9.0
