@@ -31,8 +31,8 @@ export class CalendarComponent {
         id: 'id',
         title: 'title',
         date: 'date',
-        startTime: 'startTime',
-        endTime: 'endTime',
+        start: new Date(),
+        end: new Date(),
         type: EventTypes.MEETING,
         description: 'test'
       } as IEvent
@@ -43,10 +43,10 @@ export class CalendarComponent {
   });
 
   selectDate() {
-    console.log('selectDate')
+    console.log('selectDate');
   }
 
   selectEvent() {
-    console.log('selectEvent')
+    console.log('selectEvent');
   }
 }

@@ -4,8 +4,8 @@ export interface IEvent {
   id: string;
   title: string;
   date: string;
-  startTime: string
-  endTime: string
+  start: Date;
+  end: Date;
   type: EventTypes;
   description: string;
 }
