@@ -6,7 +6,7 @@ import { CalendarOptions} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
 import { EventTypes } from 'app/types/enums/EventTypes';
-import { IEvent } from 'app/types/interfaces/ievent';
+import { IEvent } from 'app/types/interfaces/IEvent';
 
 @Component({
   selector: 'app-calendar',
@@ -27,6 +27,15 @@ export class CalendarComponent {
     firstDay: 1,
 
     events: [
+      { 
+        id: 'id',
+        title: 'title',
+        date: 'date',
+        start: new Date(),
+        end: new Date(),
+        type: EventTypes.MEETING,
+        description: 'test'
+      },
       { 
         id: 'id',
         title: 'title',

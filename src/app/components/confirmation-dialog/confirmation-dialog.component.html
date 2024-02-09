@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Confirm action</h2>
+<mat-dialog-content>
+  <div>
+    Are you sure you would like to delete {{ data.title }} event?
+  </div>
+  
+  <div class="buttons">
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+  </div>
+</mat-dialog-content>
