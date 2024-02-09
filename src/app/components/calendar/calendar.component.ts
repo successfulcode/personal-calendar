@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
+import interactionPlugin from '@fullcalendar/interaction';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions } from '@fullcalendar/core';
+import { CalendarOptions} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-
 
 @Component({
   selector: 'app-calendar',
@@ -13,12 +13,31 @@ import dayGridPlugin from '@fullcalendar/daygrid';
   styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent {
-  calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin],
+  calendarOptions = signal<CalendarOptions>({
+    plugins: [interactionPlugin, dayGridPlugin],
     initialView: 'dayGridMonth',
-    weekends: false,
+
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    firstDay: 1,
+
     events: [
-      { title: 'Meeting', start: new Date() }
-    ]
-  };
+      { title: 'Meeting', start: new Date() },
+      { title: 'Meeting2', start: new Date() },
+      { title: 'Meeting2', start: new Date() }
+    ],
+
+    select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this)
+  });
+
+  handleDateSelect() {
+    console.log('handleDateSelect')
+  }
+
+  handleEventClick() {
+    console.log('handleEventClick')
+  }
 }
