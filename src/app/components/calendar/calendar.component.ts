@@ -5,6 +5,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
+import { EventTypes } from 'app/types/enums/EventTypes';
+import { IEvent } from 'app/types/interfaces/ievent';
+
 @Component({
   selector: 'app-calendar',
   standalone: true,
@@ -24,9 +27,15 @@ export class CalendarComponent {
     firstDay: 1,
 
     events: [
-      { title: 'Meeting', start: new Date() },
-      { title: 'Meeting2', start: new Date() },
-      { title: 'Meeting2', start: new Date() }
+      { 
+        id: 'id',
+        title: 'title',
+        date: 'date',
+        startTime: 'startTime',
+        endTime: 'endTime',
+        type: EventTypes.MEETING,
+        description: 'test'
+      } as IEvent
     ],
 
     select: this.selectDate.bind(this),
