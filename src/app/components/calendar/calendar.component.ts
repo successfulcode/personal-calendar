@@ -29,15 +29,15 @@ export class CalendarComponent {
       { title: 'Meeting2', start: new Date() }
     ],
 
-    select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this)
+    select: this.selectDate.bind(this),
+    eventClick: this.selectEvent.bind(this)
   });
 
-  handleDateSelect() {
-    console.log('handleDateSelect')
+  selectDate() {
+    console.log('selectDate')
   }
 
-  handleEventClick() {
-    console.log('handleEventClick')
+  selectEvent() {
+    console.log('selectEvent')
   }
 }
