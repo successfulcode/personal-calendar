@@ -1,0 +1,30 @@
+$meeting: #f4cbce;
+$call: #c2f3ee;
+$out: #d7e1eb;
+
+.fc {
+  padding: 1rem;
+}
+
+.event {
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: .2rem;
+  padding-right: .2rem;
+  border-radius: 2px;
+
+  &__meeting {
+    background-color: $meeting;    ;
+  }
+
+  &__call {
+    background-color: $call;
+  }
+
+  &__out {
+    background-color: $out;
+  }
+}
