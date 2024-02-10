@@ -5,8 +5,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-import { EventTypes } from 'app/types/enums/EventTypes';
-import { IEvent } from 'app/types/interfaces/IEvent';
+import { EventTypes } from 'app/types/enums/event-types.enum';
+import { IEvent } from 'app/types/interfaces/ievent.model';
 
 @Component({
   selector: 'app-calendar',

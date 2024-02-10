@@ -1,4 +1,4 @@
-import { EventTypes } from '../enums/EventTypes';
+import { EventTypes } from '../enums/event-types.enum';
 
 export interface IEvent {
   id: string;
