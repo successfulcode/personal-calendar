@@ -17,6 +17,6 @@ export class DetailsEventComponent {
   @Output() delete = new EventEmitter<{ id: string, title: string }>();
   
   onDeleteEvent() {
-    this.delete.emit({ id: this.event.id, title: this.event.id })
+    this.delete.emit({ id: this.event.id, title: this.event.title })
   }
 }
