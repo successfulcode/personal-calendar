@@ -1,0 +1,13 @@
+.details-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  gap: .8rem;
+  padding: 4.7rem 2rem;
+
+  .title {
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+}
+
