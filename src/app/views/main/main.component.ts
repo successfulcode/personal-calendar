@@ -15,6 +15,7 @@ import { DetailsEventComponent } from 'app/components/details-event/details-even
 
 import { IEvent } from 'app/types/interfaces/ievent.model';
 import { EventActions } from 'app/types/enums/event-actions.enum';
+import moment from 'moment';
 
 @Component({
   selector: 'app-main',
@@ -26,20 +27,20 @@ import { EventActions } from 'app/types/enums/event-actions.enum';
 export class MainComponent {
   constructor(public dialog: MatDialog, private readonly store: Store) {}
 
-  isNewEvent = signal<boolean>(false);
+  newEventDate = signal<string>('');
 
   selectedEventId$ = new BehaviorSubject<string | null>(null);
   selectedEvent$ = this.selectedEventId$.pipe(
     switchMap(id => this.store.select(selectEventById(id)))
   );
 
-  openNewEvent() {
-    this.isNewEvent.set(true);
+  openNewEvent(date: string = moment().format('YYYY-MM-DD')) {
+    this.newEventDate.set(date);
     this.selectedEventId$.next(null);
   }
 
-  selectDate() {
-    this.openNewEvent();
+  selectDate(date: string) {
+    this.openNewEvent(date);
   }
 
   selectEvent(id: string) {
@@ -47,7 +48,7 @@ export class MainComponent {
       return;
     }
 
-    this.isNewEvent.set(false);
+    this.newEventDate.set('');
     this.selectedEventId$.next(id);
   }
 

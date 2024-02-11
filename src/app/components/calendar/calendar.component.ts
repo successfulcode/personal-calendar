@@ -19,7 +19,7 @@ import { selectFullCalendarEvents } from '../../store/calendar-events.selectors'
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent {
-  @Output() selectDate = new EventEmitter<void>();
+  @Output() selectDate = new EventEmitter<string>();
   @Output() selectEvent = new EventEmitter<string>();
 
   constructor(private store: Store<{events: readonly IEvent[]}>) {}
@@ -40,8 +40,8 @@ export class CalendarComponent {
     eventClick: this.onSelectEvent.bind(this)
   });
 
-  onSelectDate() {
-    this.selectDate.emit();
+  onSelectDate(info: { startStr: string }) {
+    this.selectDate.emit(info.startStr);
   }
 
   onSelectEvent(info: EventClickArg) {

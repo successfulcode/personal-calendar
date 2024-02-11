@@ -1,6 +1,6 @@
 <section class="container">
   <section class="calendar-container">
-    <app-calendar (selectDate)="selectDate()" (selectEvent)="selectEvent($event)" />
+    <app-calendar (selectDate)="selectDate($event)" (selectEvent)="selectEvent($event)" />
   </section>
   
   <section class="create-event-container"> 
@@ -8,8 +8,8 @@
       <app-details-event [event]="selectedEvent$ | async" (delete)="openConfirmation($event)" />
     }
 
-    @else if(isNewEvent()) {
-      <app-create-event (addEvent)="addEvent($event)" />
+    @else if(!!newEventDate()) {
+      <app-create-event [newEventDate]="newEventDate()" (addEvent)="addEvent($event)" />
     }
 
     @else {
