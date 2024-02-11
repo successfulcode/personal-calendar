@@ -2,12 +2,12 @@
   <!-- title -->
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input type="title" matInput formControlName="titleFormControl" [errorStateMatcher]="matcher"
+    <input type="title" matInput formControlName="title" [errorStateMatcher]="matcher"
            placeholder="Title">
-    @if (newEventForm.get('titleFormControl')?.hasError('maxlength') && !newEventForm.get('titleFormControl')?.hasError('required')) {
+    @if (newEventForm.get('title')?.hasError('maxlength') && !newEventForm.get('title')?.hasError('required')) {
       <mat-error>Max length 50 charachters</mat-error>
     }
-    @if (newEventForm.get('titleFormControl')?.hasError('required')) {
+    @if (newEventForm.get('title')?.hasError('required')) {
       <mat-error>Title is required</mat-error>
     }
   </mat-form-field>
@@ -15,7 +15,7 @@
   <!-- date -->
   <mat-form-field>
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="date">
+    <input matInput [matDatepicker]="picker" formControlName="date" [min]="minDate()">
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
@@ -23,13 +23,13 @@
   <div>
     <!-- start time -->
     <mat-form-field class="start-time">
-      <input matInput [ngxTimepicker]="startTimePicker" [format]="24" formControlName="start" [value]="'12:24'">
+      <input matInput [ngxTimepicker]="startTimePicker" [format]="24" formControlName="start" [min]="initialStartTime()">
       <ngx-material-timepicker #startTimePicker [theme]="clockTheme()"></ngx-material-timepicker>
     </mat-form-field>
 
     <!-- end time -->
     <mat-form-field>
-      <input matInput [ngxTimepicker]="endTimePicker" [format]="24" formControlName="end" [value]="'14:24'">
+      <input matInput [ngxTimepicker]="endTimePicker" [format]="24" formControlName="end" [min]="newEventForm.get('start')?.value || ''">
       <ngx-material-timepicker #endTimePicker [theme]="clockTheme()"></ngx-material-timepicker>
     </mat-form-field>
   </div>
@@ -37,7 +37,7 @@
   <!-- type -->
   <mat-form-field>
     <mat-label>Event type</mat-label>
-    <mat-select formControlName="eventType">
+    <mat-select formControlName="type">
       @for (event of eventTypes(); track event.type) {
         <mat-option [value]="event.type">{{ event.name }}</mat-option>
       }
