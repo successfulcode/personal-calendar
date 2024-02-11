@@ -3,5 +3,8 @@
   <div>Start: {{ event.start }}</div>
   <div>End: {{ event.end }}</div>
   <div>Description: {{ event.end }}</div>
-  <button (click)="onDeleteEvent()">Delete event</button>
+  <button mat-raised-button color="warn" (click)="onDeleteEvent()">
+    <mat-icon>delete</mat-icon>
+    <span>Delete</span>
+  </button>
 </section>

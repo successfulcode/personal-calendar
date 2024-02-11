@@ -1,3 +1,64 @@
-<p>create-event works!</p>
+<form class="form" [formGroup]="newEventForm">
+  <!-- title -->
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input type="title" matInput formControlName="titleFormControl" [errorStateMatcher]="matcher"
+           placeholder="Title">
+    @if (newEventForm.get('titleFormControl')?.hasError('maxlength') && !newEventForm.get('titleFormControl')?.hasError('required')) {
+      <mat-error>Max length 50 charachters</mat-error>
+    }
+    @if (newEventForm.get('titleFormControl')?.hasError('required')) {
+      <mat-error>Title is required</mat-error>
+    }
+  </mat-form-field>
 
-<button (click)="onAddEvent()">Add event</button>
+  <!-- date -->
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div>
+    <!-- start time -->
+    <mat-form-field class="start-time">
+      <input matInput [ngxTimepicker]="startTimePicker" [format]="24" formControlName="start" [value]="'12:24'">
+      <ngx-material-timepicker #startTimePicker [theme]="clockTheme()"></ngx-material-timepicker>
+    </mat-form-field>
+
+    <!-- end time -->
+    <mat-form-field>
+      <input matInput [ngxTimepicker]="endTimePicker" [format]="24" formControlName="end" [value]="'14:24'">
+      <ngx-material-timepicker #endTimePicker [theme]="clockTheme()"></ngx-material-timepicker>
+    </mat-form-field>
+  </div>
+
+  <!-- type -->
+  <mat-form-field>
+    <mat-label>Event type</mat-label>
+    <mat-select formControlName="eventType">
+      @for (event of eventTypes(); track event.type) {
+        <mat-option [value]="event.type">{{ event.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <!-- description -->
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+    @if (newEventForm.get('description')?.hasError('maxlength') && !newEventForm.get('description')?.hasError('required')) {
+      <mat-error>Max length 500 charachters</mat-error>
+    }
+  </mat-form-field>
+
+  <div>
+    <button mat-raised-button color="primary" [disabled]="!newEventForm.valid" (click)="onAddEvent()">
+      <mat-icon>event</mat-icon>
+      <span>Create event</span>
+    </button>
+  </div>
+</form>
+
+
