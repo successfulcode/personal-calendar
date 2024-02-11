@@ -1,0 +1,15 @@
+.error-container {
+  padding-top: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 2rem;
+
+  .icon {
+    color: #ffd740;
+    font-size: 50px;
+    padding-bottom: 3rem;
+    width: 100%;
+  }
+}
