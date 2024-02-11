@@ -139,5 +139,6 @@ export class CreateEventComponent {
     } as IEvent;
 
     this.addEvent.emit(newEvent as IEvent);
+    this.newEventForm.reset();
   }
 }
