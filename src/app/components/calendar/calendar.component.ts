@@ -1,21 +1,31 @@
-import { Component, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AsyncPipe } from '@angular/common';
 
 import interactionPlugin from '@fullcalendar/interaction';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions} from '@fullcalendar/core';
+import { CalendarOptions, EventClickArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-import { EventTypes } from 'app/types/enums/event-types.enum';
 import { IEvent } from 'app/types/interfaces/ievent.model';
+import { Observable } from 'rxjs';
+import { selectFullCalendarEvents } from '../../store/calendar-events.selectors';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [FullCalendarModule],
+  imports: [AsyncPipe, FullCalendarModule],
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss'
+  styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent {
+  @Output() selectDate = new EventEmitter<void>();
+  @Output() selectEvent = new EventEmitter<string>();
+
+  constructor(private store: Store<{events: readonly IEvent[]}>) {}
+  
+  events$: Observable<EventInput[]> = this.store.select(selectFullCalendarEvents);
+
   calendarOptions = signal<CalendarOptions>({
     plugins: [interactionPlugin, dayGridPlugin],
     initialView: 'dayGridMonth',
@@ -26,36 +36,15 @@ export class CalendarComponent {
     selectMirror: true,
     firstDay: 1,
 
-    events: [
-      { 
-        id: 'id',
-        title: 'title',
-        date: 'date',
-        start: new Date(),
-        end: new Date(),
-        type: EventTypes.MEETING,
-        description: 'test'
-      },
-      { 
-        id: 'id',
-        title: 'title',
-        date: 'date',
-        start: new Date(),
-        end: new Date(),
-        type: EventTypes.MEETING,
-        description: 'test'
-      } as IEvent
-    ],
-
-    select: this.selectDate.bind(this),
-    eventClick: this.selectEvent.bind(this)
+    select: this.onSelectDate.bind(this),
+    eventClick: this.onSelectEvent.bind(this)
   });
 
-  selectDate() {
-    console.log('selectDate');
+  onSelectDate() {
+    this.selectDate.emit();
   }
 
-  selectEvent() {
-    console.log('selectEvent');
+  onSelectEvent(info: EventClickArg) {
+    this.selectEvent.emit(info.event.id);
   }
 }

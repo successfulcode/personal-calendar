@@ -1,6 +1,7 @@
 $meeting: #f4cbce;
 $call: #c2f3ee;
 $out: #d7e1eb;
+$text: #151e27;
 
 .fc {
   padding: 1rem;
@@ -15,6 +16,7 @@ $out: #d7e1eb;
   padding-left: .2rem;
   padding-right: .2rem;
   border-radius: 2px;
+  color: $text;
 
   &__meeting {
     background-color: $meeting;    ;

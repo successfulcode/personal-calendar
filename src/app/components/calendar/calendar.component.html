@@ -1,4 +1,4 @@
-<full-calendar [options]="calendarOptions()">
+<full-calendar [options]="calendarOptions()" [events]="events$ | async">
   <ng-template #eventContent let-arg>
     <div class="event event__meeting">
       {{ arg.event.title }}

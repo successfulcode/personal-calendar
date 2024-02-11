@@ -1,11 +1,19 @@
 <section class="container">
   <section class="calendar-container">
-    <app-calendar />
+    <app-calendar (selectDate)="selectDate()" (selectEvent)="selectEvent($event)" />
   </section>
+  
   <section class="create-event-container"> 
-    <!-- <app-create-event /> -->
-    <app-details-event />
+    @if(selectedEvent$ | async) {
+      <app-details-event [event]="selectedEvent$ | async" (delete)="openConfirmation($event)" />
+    }
 
-    <button (click)="openConfirmation()">openConfirmation</button>
+    @else if(isNewEvent()) {
+      <app-create-event (addEvent)="addEvent($event)" />
+    }
+
+    @else {
+      <div>Would you like to create a new event ?</div>
+    }
   </section>
 </section>

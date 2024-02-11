@@ -17,14 +17,14 @@ import {
 export class ConfirmationDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: { id: string, title: string }
+    @Inject(MAT_DIALOG_DATA) public data: { id: string, title: string, confirm: () => void }
   ) { }
 
   cancel() {
     this.dialogRef.close();
   }
 
-  delete() {
-    console.log('delete', this.data);
+  confrim() {
+    this.data.confirm();
   }
 }
