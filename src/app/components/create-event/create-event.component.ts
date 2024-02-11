@@ -106,7 +106,6 @@ export class CreateEventComponent {
     const newEvent = {
       id: uuidv4(),
       title: this.newEventForm?.value?.title || '',
-      date: this.getIsoStringTime(this.newEventForm?.value?.start || ''),
       start: this.getIsoStringTime(this.newEventForm?.value?.start || ''),
       end: this.getIsoStringTime(this.newEventForm?.value?.end || ''),
       type: this.newEventForm?.value?.type,
