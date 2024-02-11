@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Signal, computed } from '@angular/core';
+import moment from 'moment';
 
 @Component({
   selector: 'app-footer',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
+  currenYear: Signal<string> = computed(() => moment().format('YYYY'));
 }
