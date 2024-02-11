@@ -21,7 +21,6 @@ export const selectEventById = (id: string | null) => {
     return createSelector(selectState, () => undefined);
   }
 
-  console.log('selectEventById id', id)
   return createSelector(
     selectState,
     (state: IState): IEvent | undefined => state.events.find(event => event.id === id)
