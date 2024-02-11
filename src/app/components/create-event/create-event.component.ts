@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal, computed, Signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal, computed, Signal, Input, SimpleChanges } from '@angular/core';
 
 import {
   FormControl,
@@ -60,8 +60,24 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrl: './create-event.component.scss'
 })
 export class CreateEventComponent {
-
+  @Input() newEventDate: string | any;
   @Output() addEvent = new EventEmitter<IEvent>();
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!!changes['newEventDate']) {
+      const dateControl = this.newEventForm.get('date');
+
+      if (!dateControl) {
+        return;
+      }
+
+      if (moment(this.newEventDate).isSameOrAfter(moment(), 'day')) {
+        dateControl.setValue(moment(this.newEventDate).format('YYYY-MM-DD'));
+      } else {
+        dateControl.setValue(moment().format('YYYY-MM-DD'));
+      }
+    }
+  }
   
   minDate = signal(moment())
 
@@ -78,19 +94,29 @@ export class CreateEventComponent {
   ]);
 
   initialStartTime: Signal<string> = computed(() => moment().format('HH:mm'));
-  initialEndTime: Signal<string> = computed(() => {
-    const initialTime = moment(this.newEventForm?.value?.start).add(INITIAL_MIN_GAP, 'minutes');
-    return moment(initialTime).format('HH:mm');
-  });
+
+  // TODO: Add initial end time
+
+  // geInitialEndTime(): string {
+  //   const startTime = this.newEventForm?.value?.start;
+
+  //   if (!startTime) {
+  //     return '';
+  //   }
+  
+  //   const [ hours, minutes ] = startTime.split(':');
+  //   return moment().set({ hour: +hours, minute: +minutes }).add(INITIAL_MIN_GAP, 'minutes').format('HH:mm') || '';
+  // };
+
   minEndTime: Signal<string> = computed(() => this.newEventForm?.value?.start || moment().format('HH:mm'));
 
   matcher = new MyErrorStateMatcher();
 
   newEventForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    date: new FormControl(moment(), [Validators.required]),
+    date: new FormControl(moment().format('YYYY-MM-DD'), [Validators.required]),
     start: new FormControl(this.initialStartTime(), [Validators.required]),
-    end: new FormControl(this.initialEndTime(), [Validators.required]),
+    end: new FormControl(this.initialStartTime(), [Validators.required]),
     type: new FormControl(this.eventTypes()[0].type, [Validators.required]),
     description: new FormControl('', Validators.maxLength(500))
   });
@@ -111,8 +137,6 @@ export class CreateEventComponent {
       type: this.newEventForm?.value?.type,
       description: this.newEventForm?.value?.description
     } as IEvent;
-
-    console.log('newEvent', newEvent)
 
     this.addEvent.emit(newEvent as IEvent);
   }
