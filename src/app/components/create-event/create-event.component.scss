@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4.5rem;
+  margin-right: 1rem;
+  padding: 5rem 2rem;
+  justify-content: start;
+  background-color: $white;
+  border-radius: $block-radius;
+}
+
+.start-time {
+  margin-right: 1rem;
+}
+
+.buttons-container {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

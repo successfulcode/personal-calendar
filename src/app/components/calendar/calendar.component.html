@@ -1,6 +1,6 @@
-<full-calendar [options]="calendarOptions()">
+<full-calendar [options]="calendarOptions()" [events]="events$ | async">
   <ng-template #eventContent let-arg>
-    <div class="event event__meeting">
+    <div [class]="'event event__'+arg.event.backgroundColor">
       {{ arg.event.title }}
     </div>
   </ng-template>

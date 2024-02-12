@@ -1,6 +1,4 @@
-$meeting: #f4cbce;
-$call: #c2f3ee;
-$out: #d7e1eb;
+@import '../../styles/variables.scss';
 
 .fc {
   padding: 1rem;
@@ -15,16 +13,36 @@ $out: #d7e1eb;
   padding-left: .2rem;
   padding-right: .2rem;
   border-radius: 2px;
+  color: $text;
+  cursor: pointer;
 
   &__meeting {
-    background-color: $meeting;    ;
+    background-color: $meeting;
   }
 
   &__call {
     background-color: $call;
   }
 
-  &__out {
+  &__out_of_office {
     background-color: $out;
   }
+}
+
+::ng-deep .fc-view {
+  background-color: $white;
+  border-radius: $block-radius;
+}
+
+::ng-deep .fc .fc-highlight {
+  background-color: lighten($primary, 50%);
+}
+
+::ng-deep .fc .fc-daygrid-day.fc-day-today {
+  background-color: $today;
+}
+
+::ng-deep .fc .fc-button-primary { 
+  color: $white;
+  background-color: $primary !important;
 }
