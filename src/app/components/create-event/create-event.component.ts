@@ -128,6 +128,11 @@ export class CreateEventComponent {
     return moment(combinedDateTime).toISOString();
   }
 
+  resetForm() {
+    this.newEventForm.get('title')?.reset();
+    this.newEventForm.get('description')?.reset();
+  }
+
   onAddEvent() {
     const newEvent = {
       id: uuidv4(),
@@ -139,6 +144,6 @@ export class CreateEventComponent {
     } as IEvent;
 
     this.addEvent.emit(newEvent as IEvent);
-    this.newEventForm.reset();
+    this.resetForm();
   }
 }
