@@ -1,9 +1,19 @@
+@import '../../styles/variables.scss';
+
 .details-container {
   display: flex;
   flex-direction: column;
   font-size: 1.2rem;
   gap: .8rem;
   padding: 4.7rem 2rem;
+
+  margin-top: 4.5rem;
+  margin-right: 1rem;
+  padding: 5rem 2rem;
+  background-color: $white;
+  border-radius: 5px;
+  max-width: 100%;
+  line-break: anywhere;
 
   .title {
     font-weight: bold;

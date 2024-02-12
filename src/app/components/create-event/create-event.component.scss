@@ -1,8 +1,14 @@
+@import '../../styles/variables.scss';
+
 .form {
   display: flex;
   flex-direction: column;
-  padding: 4.7rem 2rem;
+  margin-top: 4.5rem;
+  margin-right: 1rem;
+  padding: 5rem 2rem;
   justify-content: start;
+  background-color: $white;
+  border-radius: 5px;
 }
 
 .start-time {

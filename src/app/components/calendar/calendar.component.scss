@@ -1,8 +1,4 @@
-$primary-color: #673ab7;
-$meeting: #d7c1fe;
-$call: #fbb6eb;
-$out: #e8e6e6;
-$text: #151e27;
+@import '../../styles/variables.scss';
 
 .fc {
   padding: 1rem;
@@ -33,15 +29,19 @@ $text: #151e27;
   }
 }
 
+::ng-deep .fc-view {
+  background-color: $white;
+}
+
 ::ng-deep .fc .fc-highlight {
-  background-color: lighten($primary-color, 50%);
+  background-color: lighten($primary, 50%);
 }
 
 ::ng-deep .fc .fc-daygrid-day.fc-day-today {
-  background-color: #fdeadc;
+  background-color: $today;
 }
 
 ::ng-deep .fc .fc-button-primary { 
-  color: #fff;
-  background-color: $primary-color !important; 
+  color: $white;
+  background-color: $primary !important;
 }
