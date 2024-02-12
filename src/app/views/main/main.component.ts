@@ -7,6 +7,8 @@ import { Store } from '@ngrx/store';
 import { selectEventById } from 'app/store/calendar-events.selectors';
 
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { CalendarComponent } from 'app/components/calendar/calendar.component';
 import { ConfirmationDialogComponent } from 'app/components/confirmation-dialog/confirmation-dialog.component';
@@ -20,7 +22,8 @@ import moment from 'moment';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CalendarComponent, CreateEventComponent, DetailsEventComponent, ConfirmationDialogComponent, AsyncPipe],
+  imports: [CalendarComponent, CreateEventComponent, DetailsEventComponent, 
+    ConfirmationDialogComponent, MatIconModule, MatButtonModule, AsyncPipe],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
@@ -39,6 +42,10 @@ export class MainComponent {
     this.selectedEventId$.next(null);
   }
 
+  cancelNewEvent() {
+    this.newEventDate.set('');
+  }
+
   selectDate(date: string) {
     this.openNewEvent(date);
   }
@@ -48,7 +55,7 @@ export class MainComponent {
       return;
     }
 
-    this.newEventDate.set('');
+    this.cancelNewEvent();
     this.selectedEventId$.next(id);
   }
 

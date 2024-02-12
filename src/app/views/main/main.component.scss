@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .container {
   display: flex;
   justify-content: center;
@@ -10,4 +12,23 @@
 
 .create-event-container {
   flex: 1;
+}
+
+.create-button-block {
+  position: absolute;
+  top: 0;
+  right: 0; 
+  padding: .5rem 1.3rem .5rem;
+}
+
+.initial-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  margin-top: 10rem;
+  font-size: 1.5rem;
+  color: $white;
+  font-weight: bold;
+  opacity: 0.5;
 }

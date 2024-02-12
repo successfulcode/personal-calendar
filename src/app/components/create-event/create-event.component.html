@@ -57,10 +57,15 @@
     }
   </mat-form-field>
 
-  <div>
+  <div class="buttons-container">
     <button mat-raised-button color="primary" [disabled]="!newEventForm.valid" (click)="onAddEvent()">
       <mat-icon>event</mat-icon>
       <span>Create event</span>
+    </button>
+
+    <button mat-raised-button (click)="onCancel()">
+      <mat-icon>cancel</mat-icon>
+      <span>Cancel</span>
     </button>
   </div>
 </form>

@@ -60,8 +60,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrl: './create-event.component.scss'
 })
 export class CreateEventComponent {
-  @Input() newEventDate: string | any;
+  @Input() newEventDate: string | undefined;
   @Output() addEvent = new EventEmitter<IEvent>();
+  @Output() cancelEvent = new EventEmitter<void>();
 
   ngOnChanges(changes: SimpleChanges) {
     if (!!changes['newEventDate']) {
@@ -128,11 +129,6 @@ export class CreateEventComponent {
     return moment(combinedDateTime).toISOString();
   }
 
-  resetForm() {
-    this.newEventForm.get('title')?.reset();
-    this.newEventForm.get('description')?.reset();
-  }
-
   onAddEvent() {
     const newEvent = {
       id: uuidv4(),
@@ -144,6 +140,10 @@ export class CreateEventComponent {
     } as IEvent;
 
     this.addEvent.emit(newEvent as IEvent);
-    this.resetForm();
+    this.onCancel();
+  }
+
+  onCancel() {    
+    this.cancelEvent.emit();
   }
 }

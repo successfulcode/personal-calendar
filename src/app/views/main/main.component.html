@@ -1,3 +1,11 @@
+@if(!newEventDate()) {
+  <span class="create-button-block">
+    <button mat-fab color="primary" (click)="openNewEvent()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </span>
+}
+
 <section class="container">
   <section class="calendar-container">
     <app-calendar (selectDate)="selectDate($event)" (selectEvent)="selectEvent($event)" />
@@ -9,11 +17,11 @@
     }
 
     @else if(!!newEventDate()) {
-      <app-create-event [newEventDate]="newEventDate()" (addEvent)="addEvent($event)" />
+      <app-create-event [newEventDate]="newEventDate()" (addEvent)="addEvent($event)" (cancelEvent)="cancelNewEvent()" />
     }
 
     @else {
-      <div>Would you like to create a new event ?</div>
+      <div class="initial-message">PERSONAL CALENDAR</div>
     }
   </section>
 </section>
