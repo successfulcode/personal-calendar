@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal, computed, Signal, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Output, signal, Input, SimpleChanges } from '@angular/core';
 
 import {
   FormControl,
@@ -20,13 +20,13 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { MomentDateModule } from '@angular/material-moment-adapter';
 
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 
 import { IEvent } from 'app/types/interfaces/ievent.model';
 import { EventTypes } from 'app/types/enums/event-types.enum';
+import { generateTimeSlots } from 'app/utils/time-slots';
+import { Subscription } from 'rxjs';
 
 const MY_FORMATS = {
   parse: {
@@ -55,7 +55,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   standalone: true,
   providers: [{ provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }],
   imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatDatepickerModule, 
-    MatSelectModule, NgxMaterialTimepickerModule, MatButtonModule, MatIconModule, MomentDateModule],
+    MatSelectModule, MatButtonModule, MatIconModule, MomentDateModule],
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.scss'
 })
@@ -63,6 +63,26 @@ export class CreateEventComponent {
   @Input() newEventDate: string | undefined;
   @Output() addEvent = new EventEmitter<IEvent>();
   @Output() cancelEvent = new EventEmitter<void>();
+
+  matcher = new MyErrorStateMatcher();
+
+  minDate = signal(moment());
+
+  eventTypes = signal([
+    {type: EventTypes.MEETING, name: 'Meeting'},
+    {type: EventTypes.CALL, name:'Call'},
+    {type: EventTypes.OUT_OF_OFFICE, name: 'Out of office'}
+  ]);
+
+  startTimeSlots = signal(['']);
+  endTimeSlots = signal(['']);
+  startTimeChangeSubscription: Subscription | undefined;
+
+  ngOnInit() {
+    this._setInitialStartTime();
+
+    this._setStartTimeSubscription();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!!changes['newEventDate']) {
@@ -79,48 +99,59 @@ export class CreateEventComponent {
       }
     }
   }
-  
-  minDate = signal(moment())
 
-  clockTheme = signal({
-    container: { buttonColor: CLOCK_COLOR },
-    dial: { dialBackgroundColor: CLOCK_COLOR,},
-    clockFace: { clockHandColor: CLOCK_COLOR }
-  });
+  ngOnDestroy() {
+    if (!this.startTimeChangeSubscription) {
+      return;
+    }
 
-  eventTypes = signal([
-    {type: EventTypes.MEETING, name: 'Meeting'},
-    {type: EventTypes.CALL, name:'Call'},
-    {type: EventTypes.OUT_OF_OFFICE, name: 'Out of office'}
-  ]);
-
-  initialStartTime: Signal<string> = computed(() => moment().format('HH:mm'));
-
-  // TODO: Add initial end time
-
-  // geInitialEndTime(): string {
-  //   const startTime = this.newEventForm?.value?.start;
-
-  //   if (!startTime) {
-  //     return '';
-  //   }
-  
-  //   const [ hours, minutes ] = startTime.split(':');
-  //   return moment().set({ hour: +hours, minute: +minutes }).add(INITIAL_MIN_GAP, 'minutes').format('HH:mm') || '';
-  // };
-
-  minEndTime: Signal<string> = computed(() => this.newEventForm?.value?.start || moment().format('HH:mm'));
-
-  matcher = new MyErrorStateMatcher();
+    this.startTimeChangeSubscription.unsubscribe();
+  }
 
   newEventForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     date: new FormControl(moment().format('YYYY-MM-DD'), [Validators.required]),
-    start: new FormControl(this.initialStartTime(), [Validators.required]),
-    end: new FormControl(this.initialStartTime(), [Validators.required]),
+    start: new FormControl('', [Validators.required]),
+    end: new FormControl('', [Validators.required]),
     type: new FormControl(this.eventTypes()[0].type, [Validators.required]),
     description: new FormControl('', [Validators.maxLength(500)])
   });
+
+  _setInitialStartTime() {
+    const timeSlots = generateTimeSlots();
+    this.startTimeSlots.set(timeSlots);
+
+    const initialTimeIndex = this.findCurrentTimeIndex(this.startTimeSlots()),
+      selectedIndex = (initialTimeIndex + 1) <= timeSlots.length ? initialTimeIndex : 0;
+
+    this.newEventForm.get('start')?.setValue(this.startTimeSlots()[selectedIndex]);
+  }
+
+  _setStartTimeSubscription() {
+    this.startTimeChangeSubscription = this.newEventForm.get('start')?.valueChanges.subscribe(value => {
+      const endTimeSlots = generateTimeSlots(value || '00:00');
+
+      this.endTimeSlots.set(endTimeSlots.length ? endTimeSlots : ['24:00']);
+      const endTimeIndex = endTimeSlots.length > 1 ? 1 : 0;
+
+      const endTime = this.newEventForm.get('end')?.value,
+        endTimePlus5Min = moment(endTime, 'HH:mm').subtract(5, 'minutes').format('HH:mm'),
+        isEndTimeAfter = moment(endTimePlus5Min, 'HH:mm').isAfter(moment(value, 'HH:mm'));
+
+      if (!endTime || !isEndTimeAfter) {
+        this.newEventForm.get('end')?.setValue(this.endTimeSlots()[endTimeIndex]);
+      }
+    });
+
+    this.newEventForm.get('start')?.updateValueAndValidity();
+  }
+
+  findCurrentTimeIndex(timeOptions:string[]) {
+    const currentTime = moment(),
+      currentIndex = timeOptions.findIndex(time => moment(time, 'HH:mm').isSameOrAfter(currentTime, 'minute'));
+  
+    return currentIndex;
+  };
 
   getIsoStringTime(time: string) {
     const [hours, minutes] = time.split(':').map(Number),
