@@ -119,7 +119,7 @@ export class CreateEventComponent {
     start: new FormControl(this.initialStartTime(), [Validators.required]),
     end: new FormControl(this.initialStartTime(), [Validators.required]),
     type: new FormControl(this.eventTypes()[0].type, [Validators.required]),
-    description: new FormControl('', Validators.maxLength(500))
+    description: new FormControl('', [Validators.maxLength(500)])
   });
 
   getIsoStringTime(time: string) {
@@ -129,7 +129,7 @@ export class CreateEventComponent {
     return moment(combinedDateTime).toISOString();
   }
 
-  onAddEvent() {
+  onSubmit() {
     const newEvent = {
       id: uuidv4(),
       title: this.newEventForm?.value?.title || '',

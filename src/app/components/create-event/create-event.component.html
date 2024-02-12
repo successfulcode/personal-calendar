@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="newEventForm">
+<form class="form" [formGroup]="newEventForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
   <!-- title -->
   <mat-form-field>
     <mat-label>Title</mat-label>
@@ -51,14 +51,14 @@
   <!-- description -->
   <mat-form-field>
     <mat-label>Description</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-    @if (newEventForm.get('description')?.hasError('maxlength') && !newEventForm.get('description')?.hasError('required')) {
+    <textarea matInput formControlName="description" [errorStateMatcher]="matcher"></textarea>
+    @if (newEventForm.get('description')?.hasError('maxlength')) {
       <mat-error>Max length 500 charachters</mat-error>
     }
   </mat-form-field>
 
   <div class="buttons-container">
-    <button mat-raised-button color="primary" [disabled]="!newEventForm.valid" (click)="onAddEvent()">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!newEventForm.valid">
       <mat-icon>event</mat-icon>
       <span>Create event</span>
     </button>
