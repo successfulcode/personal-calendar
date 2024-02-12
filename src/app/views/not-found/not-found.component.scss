@@ -1,3 +1,5 @@
+@import'../../styles/variables.scss';
+
 .error-container {
   padding-top: 15rem;
   display: flex;
@@ -7,7 +9,7 @@
   font-size: 2rem;
 
   .icon {
-    color: #ffd740;
+    color: darken($today, 35%);
     font-size: 50px;
     padding-bottom: 3rem;
     width: 100%;
