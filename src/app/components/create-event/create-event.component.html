@@ -24,17 +24,24 @@
   </mat-form-field>
 
   <div>
-    
-    <!-- start time -->
+    <!-- startTimeSlots -->
     <mat-form-field class="start-time">
-      <input matInput [ngxTimepicker]="startTimePicker" [format]="24" formControlName="start" [min]="initialStartTime()">
-      <ngx-material-timepicker #startTimePicker [theme]="clockTheme()"></ngx-material-timepicker>
+      <mat-label>Start time</mat-label>
+      <mat-select formControlName="start">
+        @for (time of startTimeSlots(); track time) {
+          <mat-option [value]="time">{{ time }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     <!-- end time -->
     <mat-form-field>
-      <input matInput [ngxTimepicker]="endTimePicker" [format]="24" formControlName="end" [min]="newEventForm.get('start')?.value || ''">
-      <ngx-material-timepicker #endTimePicker [theme]="clockTheme()"></ngx-material-timepicker>
+      <mat-label>End time</mat-label>
+      <mat-select formControlName="end">
+        @for (time of endTimeSlots(); track time) {
+          <mat-option [value]="time">{{ time }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
   </div>
 
