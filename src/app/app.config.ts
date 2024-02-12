@@ -3,7 +3,13 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideStore } from '@ngrx/store';
+import { EventsReducer } from './store/calendar-events.reducer';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync()]
+  providers: [
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideStore({ events: EventsReducer })
+  ]
 };

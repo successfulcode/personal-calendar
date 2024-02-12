@@ -1,1 +1,80 @@
-<p>create-event works!</p>
+<form class="form" [formGroup]="newEventForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+  <!-- title -->
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input type="title" matInput formControlName="title" [errorStateMatcher]="matcher" placeholder="Title">
+    @if (newEventForm.get('title')?.hasError('maxlength') && !newEventForm.get('title')?.hasError('required')) {
+      <mat-error>Max length 50 charachters</mat-error>
+    }
+    @if (newEventForm.get('title')?.hasError('required')) {
+      <mat-error>Title is required</mat-error>
+    }
+  </mat-form-field>
+
+  <!-- date -->
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date" [min]="minDate()">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+    @if (newEventForm.get('date')?.errors) {
+      <mat-error>Invalid date</mat-error>
+    }
+  </mat-form-field>
+
+  <div>
+    <!-- startTimeSlots -->
+    <mat-form-field class="start-time">
+      <mat-label>Start time</mat-label>
+      <mat-select formControlName="start">
+        @for (time of startTimeSlots(); track time) {
+          <mat-option [value]="time">{{ time }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <!-- end time -->
+    <mat-form-field>
+      <mat-label>End time</mat-label>
+      <mat-select formControlName="end">
+        @for (time of endTimeSlots(); track time) {
+          <mat-option [value]="time">{{ time }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- type -->
+  <mat-form-field>
+    <mat-label>Event type</mat-label>
+    <mat-select formControlName="type">
+      @for (event of eventTypes(); track event.type) {
+        <mat-option [value]="event.type">{{ event.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <!-- description -->
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" [errorStateMatcher]="matcher"></textarea>
+    @if (newEventForm.get('description')?.hasError('maxlength')) {
+      <mat-error>Max length 500 charachters</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="buttons-container">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!newEventForm.valid">
+      <mat-icon>event</mat-icon>
+      <span>Create event</span>
+    </button>
+
+    <button mat-raised-button (click)="onCancel()">
+      <mat-icon>cancel</mat-icon>
+      <span>Cancel</span>
+    </button>
+  </div>
+</form>
+
+

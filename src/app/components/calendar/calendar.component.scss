@@ -1,0 +1,48 @@
+@import '../../styles/variables.scss';
+
+.fc {
+  padding: 1rem;
+}
+
+.event {
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: .2rem;
+  padding-right: .2rem;
+  border-radius: 2px;
+  color: $text;
+  cursor: pointer;
+
+  &__meeting {
+    background-color: $meeting;
+  }
+
+  &__call {
+    background-color: $call;
+  }
+
+  &__out_of_office {
+    background-color: $out;
+  }
+}
+
+::ng-deep .fc-view {
+  background-color: $white;
+  border-radius: $block-radius;
+}
+
+::ng-deep .fc .fc-highlight {
+  background-color: lighten($primary, 50%);
+}
+
+::ng-deep .fc .fc-daygrid-day.fc-day-today {
+  background-color: $today;
+}
+
+::ng-deep .fc .fc-button-primary { 
+  color: $white;
+  background-color: $primary !important;
+}
