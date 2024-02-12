@@ -12,7 +12,9 @@ export const selectFullCalendarEvents = createSelector(
     id: event.id,
     title: event.title,
     start: event.start,
-    end: event.end
+    end: event.end,
+    isDraggable: false,
+    backgroundColor: event.type.toLowerCase()
   }))
 );
 

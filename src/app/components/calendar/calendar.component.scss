@@ -17,16 +17,17 @@ $text: #151e27;
   padding-right: .2rem;
   border-radius: 2px;
   color: $text;
+  cursor: pointer;
 
   &__meeting {
-    background-color: $meeting;    ;
+    background-color: $meeting;
   }
 
   &__call {
     background-color: $call;
   }
 
-  &__out {
+  &__out_of_office {
     background-color: $out;
   }
 }

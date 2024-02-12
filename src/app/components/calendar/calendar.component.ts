@@ -31,7 +31,7 @@ export class CalendarComponent {
     initialView: 'dayGridMonth',
 
     weekends: true,
-    editable: true,
+    editable: false,
     selectable: true,
     selectMirror: true,
     firstDay: 1,
