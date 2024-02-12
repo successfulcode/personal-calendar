@@ -39,7 +39,7 @@ export class MainComponent {
 
   openNewEvent(date: string = moment().format('YYYY-MM-DD')) {
     this.newEventDate.set(date);
-    this.selectedEventId$.next(null);
+    this.closeEventDetails()
   }
 
   cancelNewEvent() {
@@ -57,6 +57,10 @@ export class MainComponent {
 
     this.cancelNewEvent();
     this.selectedEventId$.next(id);
+  }
+
+  closeEventDetails() {
+    this.selectedEventId$.next(null);
   }
 
   openConfirmation({id, title}: {id: string, title: string}) {

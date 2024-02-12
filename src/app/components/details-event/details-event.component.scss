@@ -19,5 +19,12 @@
     font-weight: bold;
     margin-right: 1rem;
   }
+
+  .buttons-container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }
 

@@ -20,10 +20,15 @@
     <span>{{ event.description }}</span>
   </div>
 
-  <div>
+  <div class="buttons-container">
     <button mat-raised-button color="warn" (click)="onDeleteEvent()">
       <mat-icon>delete</mat-icon>
       <span>Delete</span>
+    </button>
+
+    <button mat-raised-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      <span>Close</span>
     </button>
   </div>
 </section>

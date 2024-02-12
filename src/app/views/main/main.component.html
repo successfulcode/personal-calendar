@@ -13,7 +13,7 @@
   
   <section class="create-event-container"> 
     @if(selectedEvent$ | async) {
-      <app-details-event [event]="selectedEvent$ | async" (delete)="openConfirmation($event)" />
+      <app-details-event [event]="selectedEvent$ | async" (delete)="openConfirmation($event)" (close)="closeEventDetails()" />
     }
 
     @else if(!!newEventDate()) {
