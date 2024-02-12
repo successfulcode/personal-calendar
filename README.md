@@ -10,6 +10,13 @@ The Personal Calendar app is designed to help users manage their events efficien
 
 ^18.13.0 || ^20.9.0
 
+## Used Libraries
+
+- **NgRx**: NgRx is a powerful state management library for Angular applications.
+- **Material UI**: Material UI is a popular React UI framework, but it can be used with Angular as well. It provides a set of pre-designed React components that implement Google's Material Design.
+- **FullCalendar/Angular**: FullCalendar is a JavaScript event calendar that is highly customizable and supports various views and interactions. FullCalendar/Angular provides Angular wrappers for integrating FullCalendar with Angular applications.
+- **uuid**: UUID is a library for generating RFC-compliant UUIDs (Universally Unique Identifiers). It is often used for generating unique identifiers for entities in databases or applications.
+
 ## Angular CLI
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
