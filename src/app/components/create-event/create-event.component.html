@@ -2,8 +2,7 @@
   <!-- title -->
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input type="title" matInput formControlName="title" [errorStateMatcher]="matcher"
-           placeholder="Title">
+    <input type="title" matInput formControlName="title" [errorStateMatcher]="matcher" placeholder="Title">
     @if (newEventForm.get('title')?.hasError('maxlength') && !newEventForm.get('title')?.hasError('required')) {
       <mat-error>Max length 50 charachters</mat-error>
     }
