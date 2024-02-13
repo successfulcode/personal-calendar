@@ -28,7 +28,7 @@ import { EventTypes } from 'app/types/enums/event-types.enum';
 import { generateTimeSlots } from 'app/utils/time-slots';
 import { Subscription } from 'rxjs';
 
-const MY_FORMATS = {
+const CUSTOM_DATE_FORMATS = {
   parse: {
     dateInput: 'YYYY-MM-DD',
   },
@@ -37,11 +37,8 @@ const MY_FORMATS = {
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
-  },
-},
-INITIAL_MIN_GAP = 15;
-
-const CLOCK_COLOR = '#673ab7';
+  }
+}
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -53,7 +50,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-create-event',
   standalone: true,
-  providers: [{ provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }],
+  providers: [{ provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }],
   imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatDatepickerModule, 
     MatSelectModule, MatButtonModule, MatIconModule, MomentDateModule],
   templateUrl: './create-event.component.html',
