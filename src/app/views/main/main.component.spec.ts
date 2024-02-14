@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainComponent } from './main.component';
+import { provideStore } from '@ngrx/store';
+import { EventsReducer } from 'app/store/calendar-events.reducer';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -8,7 +10,8 @@ describe('MainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainComponent]
+      imports: [MainComponent],
+      providers:[provideStore({ events: EventsReducer })]
     })
     .compileComponents();
     

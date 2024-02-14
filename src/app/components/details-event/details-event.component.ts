@@ -12,13 +12,12 @@ import { DatePipe } from '@angular/common';
   styleUrl: './details-event.component.scss'
 })
 export class DetailsEventComponent {
-  // TODO: Fix any type
-  @Input() event: IEvent | any;
+  @Input() event: IEvent | undefined | null;
   @Output() delete = new EventEmitter<{ id: string, title: string }>();
   @Output() close = new EventEmitter<void>();
 
   onDeleteEvent() {
-    this.delete.emit({ id: this.event?.id || '', title: this.event?.title || '' });
+    this.delete.emit({ id: this.event?.id || '', title: this.event?.title ?? '' });
   }
 
   onClose() {
