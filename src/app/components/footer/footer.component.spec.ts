@@ -35,7 +35,7 @@ describe('FooterComponent', () => {
 
   it('should render a footer text', () => {
     const element = fixture.nativeElement,
-      footerText = `© ${currentYear} [S.M]. All rights reserved`;
+      footerText = `© ${currentYear} [S.M]. All rights reserved1`;
 
     expect(element.querySelector('footer')?.textContent).toContain(footerText);
   });
