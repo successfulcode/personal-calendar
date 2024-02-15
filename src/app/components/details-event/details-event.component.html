@@ -1,23 +1,23 @@
 <section class="details-container">
   <div>
-    <span class="title">Title:</span>
-    <span>{{ event?.title }}</span>
+    <span class="label">Title:</span>
+    <span id="title">{{ event?.title }}</span>
   </div>
   <div>
-    <span class="title">Start date:</span>
-    <span>{{ event?.start | date:'yyyy-mm-dd' }}</span>
+    <span class="label">Start date:</span>
+    <span id="date">{{ event?.start | date:'yyyy-mm-dd' }}</span>
   </div>
   <div>
-    <span class="title">Start time:</span>
-    <span>{{ event?.start | date:'HH:mm'}}</span>
+    <span class="label">Start time:</span>
+    <span id="start">{{ event?.start | date:'HH:mm'}}</span>
   </div>
   <div>
-    <span class="title">End time:</span>
-    <span>{{ event?.end | date:'HH:mm' }}</span>
+    <span class="label">End time:</span>
+    <span id="end">{{ event?.end | date:'HH:mm' }}</span>
   </div>
   <div>
-    <span class="title">Description:</span>
-    <span>{{ event?.description }}</span>
+    <span class="label">Description:</span>
+    <span id="description">{{ event?.description }}</span>
   </div>
 
   <div class="buttons-container">
