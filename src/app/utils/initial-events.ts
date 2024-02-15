@@ -41,7 +41,7 @@ const eventTypes = Object.values(EventTypes),
     'Reviewing the project risks',
   ];
 
-for (let month = 5; month >= 0; month--) {
+for (let month = 6; month >= 0; month--) {
   for (let day = 1; day <= 29; day += 3) {
     const date = moment().subtract(month, 'months').date(day),
     event = {
