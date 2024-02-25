@@ -1,8 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { EventTypes } from 'app/types/enums/event-types.enum';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { IEvent } from 'app/types/interfaces/ievent.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DatePipe } from '@angular/common';
+
+const meetingTitles = {
+  [EventTypes.MEETING]: 'Meeting',
+  [EventTypes.CALL]: 'Call',
+  [EventTypes.OUT_OF_OFFICE]: 'Out of office',
+  NONE: ''
+}
 
 @Component({
   selector: 'app-details-event',
@@ -19,6 +27,8 @@ export class DetailsEventComponent {
   onDeleteEvent() {
     this.delete.emit({ id: this.event?.id || '', title: this.event?.title ?? '' });
   }
+
+  titles = signal(meetingTitles);
 
   onClose() {
     this.close.emit();

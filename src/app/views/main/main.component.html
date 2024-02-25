@@ -10,10 +10,9 @@
   <section class="calendar-container">
     <app-calendar (selectDate)="selectDate($event)" (selectEvent)="selectEvent($event)" />
   </section>
-  
   <section class="create-event-container"> 
-    @if(selectedEvent$ | async) {
-      <app-details-event [event]="selectedEvent$ | async" (delete)="openConfirmation($event)" (close)="closeEventDetails()" />
+    @if((selectedEvent$ | async); as event) {
+      <app-details-event [event]="event" (delete)="openConfirmation($event)" (close)="closeEventDetails()" />
     }
 
     @else if(!!newEventDate()) {

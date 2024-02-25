@@ -37,7 +37,7 @@ describe('DetailsEventComponent', () => {
 
     const getElement = (id: string): string => element.querySelector(id).textContent
     expect(getElement('#title')).toContain(component?.event?.title ?? '');
-    expect(getElement('#date')).toContain(datePipe.transform(component?.event?.start, 'yyyy-mm-dd')!);
+    expect(getElement('#date')).toContain(datePipe.transform(component?.event?.start, 'yyyy-MM-dd')!);
     expect(getElement('#start')).toContain(datePipe.transform(component?.event?.start, 'HH:mm')!);
     expect(getElement('#end')).toContain(datePipe.transform(component?.event?.end, 'HH:mm')!);
     expect(getElement('#description')).toContain(component?.event?.description!);
