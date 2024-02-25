@@ -4,5 +4,6 @@ import { MainComponent } from './views/main/main.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' }
 ];
