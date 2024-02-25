@@ -27,8 +27,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "./netlify.toml"
+              "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
